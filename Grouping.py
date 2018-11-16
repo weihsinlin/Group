@@ -133,7 +133,7 @@ class Person():
     name, gender, talk, christian, counselor, fixed_group = None, None, None, None, None, None
 
     def __init__(self, name="", gender="", talk="", christian="", counselor="", fixed_group=""):
-        self.name = name.upper()
+        self.name = name
         if gender == "男":
             self.gender = "M"
         else:
