@@ -11,6 +11,7 @@ def read(input_path): # Return a list
         data = [s.strip() for s in data]
         p = Person(data[0], data[1], data[2], data[3], data[4], data[5])
         rtn.append(p)
+
     return rtn
 
 
@@ -102,12 +103,23 @@ def grouping(people):
     not_fixed += ntcf
     not_fixed += ntncf
 
+    # print("ntcm")
+    # for p in ntcm: print(p)
+    # print("ntncm")
+    # for p in ntncm: print(p)
+    # print("ntcf")
+    # for p in ntcf: print(p)
+    # print("ntncf")
+    # for p in ntncf: print(p)
+
+
     sizes = [len(g) for g in groups]
     i = which_min(sizes)
 
     for p in not_fixed:
         groups[i%4].append(p)
         i += 1
+
 
     return groups
 
@@ -123,12 +135,12 @@ class Person():
     def __init__(self, name="", gender="", talk="", christian="", counselor="", fixed_group=""):
         self.name = name.upper()
         if gender == "男":
-            self.gender == "M"
+            self.gender = "M"
         else:
-            self.gender == "F"
+            self.gender = "F"
         # self.gender = gender.upper()
         self.talk = talk.upper() == "Y"
-        self.christian = christian.upper() == "Christian"
+        self.christian = christian.upper() == "Christian".upper()
         self.counselor = counselor.upper() == "Y"
         self.fixed_group = fixed_group
 
@@ -136,6 +148,7 @@ class Person():
 
     def __str__(self) -> str:
         return "Name: " + self.name + \
+               " Gender = " + str(self.gender) + \
                " Talk = " + str(self.talk) + \
                " Christian = " + str(self.christian) + \
                " Counselor = " + str(self.counselor) + \
@@ -157,7 +170,7 @@ def getDate():
 
 
 if __name__ == '__main__':
-    input_path = "/Users/Philip/Desktop/input.csv"
+    input_path = "/Users/Philip/Desktop/List_of_Student.csv"
     d = getDate()
     output_path = "/Users/Philip/Desktop/" + d + "分組.csv"
     people = read(input_path)
