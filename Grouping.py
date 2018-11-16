@@ -7,6 +7,7 @@ def read(input_path): # Return a list
     lines = [line.rstrip('\n') for line in open(input_path)][1:]
     for line in lines:
         data = line.split(",")
+        if data[0] == "": continue
         data = [s.strip() for s in data]
         p = Person(data[0], data[1], data[2], data[3], data[4], data[5])
         rtn.append(p)
@@ -89,6 +90,7 @@ def grouping(people):
     shuffle(ntcf)
     shuffle(ntncf)
 
+
     not_fixed = []
 
     not_fixed += tcm
@@ -116,13 +118,17 @@ def which_min(sizes):
         if sizes[i] == min_s: return i
 
 class Person():
-    # name, gender, talk, christian, counselor, fixed_group = None, None, None, None, None, None
+    name, gender, talk, christian, counselor, fixed_group = None, None, None, None, None, None
 
     def __init__(self, name="", gender="", talk="", christian="", counselor="", fixed_group=""):
         self.name = name.upper()
-        self.gender = gender.upper()
+        if gender == "男":
+            self.gender == "M"
+        else:
+            self.gender == "F"
+        # self.gender = gender.upper()
         self.talk = talk.upper() == "Y"
-        self.christian = christian.upper() == "Y"
+        self.christian = christian.upper() == "Christian"
         self.counselor = counselor.upper() == "Y"
         self.fixed_group = fixed_group
 
