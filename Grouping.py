@@ -7,7 +7,7 @@ def read(input_path): # Return a list
     lines = [line.rstrip('\n') for line in open(input_path)][1:]
     for line in lines:
         data = line.split(",")
-        if data[0] == "": continue
+        if data[0].strip() == "": continue
         data = [s.strip() for s in data]
         p = Person(data[0], data[1], data[2], data[3], data[4], data[5])
         rtn.append(p)
@@ -142,7 +142,10 @@ class Person():
         self.talk = talk.upper() == "Y"
         self.christian = christian.upper() == "Christian".upper()
         self.counselor = counselor.upper() == "Y"
-        self.fixed_group = fixed_group
+        if fixed_group.strip() == "":
+            self.fixed_group == "0"
+        else:
+            self.fixed_group = fixed_group.strip()
 
 
 
@@ -170,7 +173,7 @@ def getDate():
 
 
 if __name__ == '__main__':
-    input_path = "/Users/Philip/Desktop/List_of_Student.csv"
+    input_path = "/Users/Philip/Desktop/List_of_Students.csv"
     d = getDate()
     output_path = "/Users/Philip/Desktop/" + d + "分組.csv"
     people = read(input_path)
