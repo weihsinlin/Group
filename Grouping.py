@@ -2,7 +2,7 @@ from random import shuffle
 import datetime
 
 
-def read(input_path): # Return a list
+def read(input_path):
     rtn = []
     lines = [line.rstrip('\n') for line in open(input_path)][1:]
     for line in lines:
@@ -34,7 +34,6 @@ def write(groups, output_path):
         line = g1[i] + ", " + g2[i] + ", " + g3[i] + ", " + g4[i] + "\n"
         f.write(line)
     print("CSV file was created: " + output_path)
-
 
 
 def grouping(people):
@@ -103,23 +102,12 @@ def grouping(people):
     not_fixed += ntcf
     not_fixed += ntncf
 
-    # print("ntcm")
-    # for p in ntcm: print(p)
-    # print("ntncm")
-    # for p in ntncm: print(p)
-    # print("ntcf")
-    # for p in ntcf: print(p)
-    # print("ntncf")
-    # for p in ntncf: print(p)
-
-
     sizes = [len(g) for g in groups]
     i = which_min(sizes)
 
     for p in not_fixed:
         groups[i%4].append(p)
         i += 1
-
 
     return groups
 
@@ -129,7 +117,9 @@ def which_min(sizes):
     for i in range(len(sizes)):
         if sizes[i] == min_s: return i
 
-class Person():
+
+class Person:
+
     name, gender, talk, christian, counselor, fixed_group = None, None, None, None, None, None
 
     def __init__(self, name="", gender="", talk="", christian="", counselor="", fixed_group=""):
@@ -138,7 +128,6 @@ class Person():
             self.gender = "M"
         else:
             self.gender = "F"
-        # self.gender = gender.upper()
         self.talk = talk.upper() == "Y"
         self.christian = christian.upper() == "Christian".upper()
         self.counselor = counselor.upper() == "Y"
@@ -146,8 +135,6 @@ class Person():
             self.fixed_group == "0"
         else:
             self.fixed_group = fixed_group.strip()
-
-
 
     def __str__(self) -> str:
         return "Name: " + self.name + \
@@ -157,8 +144,6 @@ class Person():
                " Counselor = " + str(self.counselor) + \
                " Fixed_group = " + self.fixed_group
 
-    def getFix(self):
-        return self.fixed_group
 
 def print_groups(groups):
     for i in range(len(groups)):
@@ -166,10 +151,10 @@ def print_groups(groups):
         for p in groups[i]:
             print(p)
 
+
 def getDate():
     now = datetime.datetime.now()
     return str(now.month) + str(now.day) + str(now.year)
-
 
 
 if __name__ == '__main__':
